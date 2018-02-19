@@ -6,7 +6,6 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(__dirname + "/"));
 
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -64,7 +63,7 @@ app.post("/api/send", (req, res) => {
   });
 });
 
-const port = process.env.PORT || 1337;
+const port = process.env.PORT || 1234;
 app.listen(port, () => {
-  console.log("listening on port 1337!");
+  console.log("listening on port 1234!");
 });
