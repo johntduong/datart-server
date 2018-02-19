@@ -57,6 +57,6 @@ app.post("/send", (req, res) => {
   });
 });
 
-const port = 1337;
+const port = 3000;
 app.listen(port);
 console.log("Listening on port", port);
