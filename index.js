@@ -19,7 +19,12 @@ let transporter = nodemailer.createTransport({
 
 app.get("/", (req, res) => {
   console.log("GET RECEIVED");
-  res.end("ENDING");
+  res.end("ENDING ROOT");
+});
+
+app.get("/test", (req, res) => {
+  console.log("GET RECEIVED");
+  res.end("ENDING TEST");
 });
 
 app.route("/api/send").post((req, res) => {
