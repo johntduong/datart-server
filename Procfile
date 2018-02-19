@@ -1,1 +1,1 @@
-web: yarn start -- --port ${PORT-:1337}
+web: yarn start
