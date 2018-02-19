@@ -1,7 +1,8 @@
 const express = require("express");
-const app = express();
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
+
+const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -21,42 +22,45 @@ app.get("/", (req, res) => {
   res.end("ENDING");
 });
 
-app.post("/send", (req, res) => {
-  console.log("POST RECEIVED");
-  console.log("BODY", req.body);
-  let mailOptions = {
-    from: "Contact Form Request: <" + req.body.from + ">", // sender address
-    to: "datduongart@gmail.com", // list of receivers
-    subject: "Contact Form Message", // Subject line
-    text: "Hello", // plain text body
-    html:
-      "From: " +
-      req.body.name +
-      "<br>" +
-      "User's email: " +
-      req.body.user +
-      "<br>" +
-      "Message: " +
-      req.body.text // html body
-  };
+app.route("/api/send")
+  .post((req, res) => {
+    console.log("POST RECEIVED");
+    console.log("BODY", req.body);
+    let mailOptions = {
+      from: "Contact Form Request: <" + req.body.from + ">", // sender address
+      to: "datduongart@gmail.com", // list of receivers
+      subject: "Contact Form Message", // Subject line
+      text: "Hello", // plain text body
+      html:
+        "From: " +
+        req.body.name +
+        "<br>" +
+        "User's email: " +
+        req.body.user +
+        "<br>" +
+        "Message: " +
+        req.body.text // html body
+    };
 
-  console.log("These are the mailOptions", mailOptions);
+    console.log("These are the mailOptions", mailOptions);
 
-  // send mail with defined transport object
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return console.log(error);
-    }
-    console.log("Message sent: %s", info.messageId);
-    // Preview only available when sending through an Ethereal account
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    res.end("sent");
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      }
+      console.log("Message sent: %s", info.messageId);
+      // Preview only available when sending through an Ethereal account
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+      res.end("sent");
 
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+      // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+      // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    });
   });
-});
 
-const port = 3000;
-app.listen(process.env.PORT || 3000);
-console.log("Listening on port", port);
+
+const port = process.env.PORT || 3000;
+app.listen(port, , () => {
+  console.log('listening on port 3000!');
+});
