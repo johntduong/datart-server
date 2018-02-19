@@ -28,7 +28,7 @@ app.get("/test", (req, res) => {
   res.end("ENDING TEST");
 });
 
-app.route("/api/send").post((req, res) => {
+app.post("/api/send", (req, res) => {
   console.log("POST RECEIVED");
   console.log("BODY", req.body);
   let mailOptions = {
@@ -64,7 +64,7 @@ app.route("/api/send").post((req, res) => {
   });
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 1337;
 app.listen(port, () => {
-  console.log("listening on port 3000!");
+  console.log("listening on port 1337!");
 });
