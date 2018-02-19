@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "server": "node index.js"
+    "start": "node index.js"
   },
   "name": "datart-server",
   "version": "1.0.0",
