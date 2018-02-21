@@ -4,8 +4,16 @@ const nodemailer = require("nodemailer");
 
 const app = express();
 
+const corOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: true,
+  allowedHeaders: "Content-Type,Authorization,X-Requested-With"
+};
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors(corOptions));
 
 let transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
